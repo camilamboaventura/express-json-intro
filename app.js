@@ -2,12 +2,14 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
 // Configura o app para entender requisições com tipo de corpo JSON
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(express.urlencoded({ extended: false }));
+app.use(cors({ origin: process.env.REACT_APP_URL }));
 
 const projectRouter = require("./routes/project.routes");
 const taskRouter = require("./routes/task.routes");
@@ -16,6 +18,8 @@ const authRouter = require("./routes/auth.routes");
 require("./configs/db.config");
 
 require("./configs/passport.config")(app);
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api", projectRouter);
 app.use("/api", taskRouter);
