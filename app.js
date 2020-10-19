@@ -9,8 +9,7 @@ const app = express();
 // Configura o app para entender requisições com tipo de corpo JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cors({ origin: process.env.REACT_APP_URL }));
-app.use(cors());
+app.use(cors({ origin: process.env.REACT_APP_URL }));
 
 const projectRouter = require("./routes/project.routes");
 const taskRouter = require("./routes/task.routes");
