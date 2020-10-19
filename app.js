@@ -19,7 +19,15 @@ require("./configs/db.config");
 
 require("./configs/passport.config")(app);
 
-app.use(express.static(path.join(__dirname, "public")));
+const publicPath = path.join(__dirname, "public");
+
+app.use(express.static(publicPath));
+
+app.get("*", (req, res) => {
+  if (!req.get("host").includes("/api")) {
+    res.sendFile(path.join(publicPath, "index.html"));
+  }
+});
 
 app.use("/api", projectRouter);
 app.use("/api", taskRouter);
