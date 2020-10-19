@@ -9,7 +9,8 @@ const app = express();
 // Configura o app para entender requisições com tipo de corpo JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors({ origin: process.env.REACT_APP_URL }));
+// app.use(cors({ origin: process.env.REACT_APP_URL }));
+app.use(cors());
 
 const projectRouter = require("./routes/project.routes");
 const taskRouter = require("./routes/task.routes");
@@ -23,10 +24,13 @@ const publicPath = path.join(__dirname, "public");
 
 app.use(express.static(publicPath));
 
-app.get("*", (req, res) => {
-  if (!req.get("host").includes("/api")) {
-    res.sendFile(path.join(publicPath, "index.html"));
+app.get("*", (req, res, next) => {
+  const hostUrl = req.originalUrl;
+  if (!hostUrl.includes("/api")) {
+    console.log(hostUrl);
+    return res.sendFile(path.join(publicPath, "index.html"));
   }
+  return next();
 });
 
 app.use("/api", projectRouter);

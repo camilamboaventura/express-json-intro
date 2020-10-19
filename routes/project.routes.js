@@ -22,6 +22,7 @@ router.get(
       // Populate automaticamente popula a array de tarefa com os respectivos documentos usando os ids no campo tasks do Model
       const result = await Project.find().populate("tasks");
 
+      console.log(result);
       return res.status(200).json(result);
     } catch (err) {
       return res.status(500).json({ error: err });
