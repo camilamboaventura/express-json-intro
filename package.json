@@ -1,0 +1,24 @@
+{
+  "name": "express-rest-intro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rschpdr/project-management-app-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rschpdr/project-management-app-api/issues"
+  },
+  "homepage": "https://github.com/rschpdr/project-management-app-api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
